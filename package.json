@@ -1,0 +1,25 @@
+{
+  "name": "practicabackend",
+  "version": "1.0.0",
+  "description": "Ejemplo de implementación de backend con NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "dev" : "nodemon src/index.js" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BilbaoJ/PracticaBackend.git"
+  },
+  "author": "Jessica Bilbao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BilbaoJ/PracticaBackend/issues"
+  },
+  "homepage": "https://github.com/BilbaoJ/PracticaBackend#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
