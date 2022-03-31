@@ -1,5 +1,6 @@
 // Importar los servicios
-const run = require('../services/mongodb.service');
+const {leerDocumentos, agregarDocumento} = require('../services/mongodb.service');
+
 
 // Controlador de usuarios
 
@@ -8,8 +9,25 @@ const run = require('../services/mongodb.service');
  * @param {Request} req 
  * @param {Response} res 
  */
-const crearUsuario = (req, res) => {
-    res.send("Crear usuarios");
+const crearUsuario = async (req, res) => {
+    let respuesta = {};
+    try {
+        respuesta.ok = true;
+        respuesta.message = "Usuarios agregado correctamente";
+        let informacion = req.body;
+        // Consulta a la base de datos de usuarios
+        let resultado = await agregarDocumento("usuarios", informacion);
+        //run().catch(console.dir);
+        console.log(resultado);
+
+        respuesta.info = resultado;
+        res.send(respuesta);
+    } catch (error) {
+        respuesta.ok = false;
+        respuesta.message = "Ha ocurrido un error agregando el usuario";
+        respuesta.info = error;
+        res.status(500).send(respuesta);   
+    }
 };
 
 /**
@@ -45,16 +63,18 @@ const modificarUsuario = (req, res) => {
  * @param {Request} req 
  * @param {Response} res 
  */
- const consultarUsuarios = (req, res) => {
+ const consultarUsuarios = async (req, res) => {
     let respuesta = {};
     try {
         respuesta.ok = true;
         respuesta.message = "Usuarios consultados correctamente";
 
         // Consulta a la base de datos de usuarios
-        run().catch(console.dir);
+        let resultado = await leerDocumentos("usuarios");
+        //run().catch(console.dir);
+        console.log(resultado);
 
-        respuesta.info = [{nombre:"Juan"}];
+        respuesta.info = resultado;
         res.send(respuesta);
     } catch (error) {
         respuesta.ok = false;
@@ -63,6 +83,7 @@ const modificarUsuario = (req, res) => {
         res.status(500).send(respuesta);    
     }
 };
+
 
 module.exports = {
     crearUsuario,
