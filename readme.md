@@ -32,9 +32,9 @@
 - `npm init`: Inicializar el proyecto con el package.json
 - `npm install NOMBRE`: Instalar las librerías o 
 frameworks en específico
-- `npm install`: Instalar TODAS las librerías o frameworks regustradas en el package.json
+- `npm install`: Instalar TODAS las librerías o frameworks registradas en el package.json
 - `npm run dev` : Ejecutar el script que se encuentra en el package.json
 
 ## Librerias y frameworks
 1. Express: `npm install express --save` Framework para crear la API
-2. nodemon: `nmp i nodemon` Herramienta de desarollo para recargat automáticamente el proyecto
+2. nodemon: `nmp i nodemon` Herramienta de desarollo para recargar automáticamente el proyecto

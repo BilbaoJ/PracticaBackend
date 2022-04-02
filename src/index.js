@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 });
 
-const PORT = 3000; // Puerto donde se levanta el servidor web (Puerto donde está escuchando la API)
+const PORT = process.env.PORT; // Puerto donde se levanta el servidor web (Puerto donde está escuchando la API)
 
 // Levantar la API que estará escuchando en el puerto 3000
 // 1. Primer parámetro: Puerto
