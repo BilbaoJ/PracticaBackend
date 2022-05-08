@@ -12,13 +12,14 @@ const version = "/api/v1";
 
 router.post(version + "/login", auth_controller.login);
 
+router.post(version + "/usuarios", usuario_controller.crearUsuario);
+
 // Para aplicar la verificación para todas las peticiones
 router.use(verificarPeticion);
 
 // Definición de los endpoints - rutas
 router.get(version + "/usuarios", usuario_controller.consultarUsuarios);
 router.get(version + "/usuarios/:id", usuario_controller.consultarUsuario);
-router.post(version + "/usuarios", usuario_controller.crearUsuario);
 router.put(version + "/usuarios/:id", usuario_controller.modificarUsuario);
 router.delete(version + "/usuarios/:id", usuario_controller.eliminarUsuario);
 
