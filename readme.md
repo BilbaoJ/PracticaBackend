@@ -38,3 +38,17 @@ frameworks en específico
 ## Librerias y frameworks
 1. Express: `npm install express --save` Framework para crear la API
 2. nodemon: `nmp i nodemon` Herramienta de desarollo para recargar automáticamente el proyecto
+
+# Módulos
+
+- Usuarios (CRUD) {id, nombre, correo, universidad, clave, rol (Cliente-Administrador)}
+- Login {correo, clave}
+- Platos (CRUD) {id, precio, categoria, nombre, vegetariano, descripción}
+- Pedidos (CRUD) {id, direccion, telefono, medio_pago, platos}
+- Seguridad (JWT) {generacion token}
+
+# Reglas de negocio
+
+- Los usuarios deben de estar registradros para realizar un pedido
+- Los usuarios no pueden agregar platos
+- Los administradores pueden gestionar platos

@@ -22,6 +22,12 @@ const leerDocumentos = async (nombreColeccion, filtro) => {
   return coleccion.find(filtro).toArray();
 }
 
+const leerDocumento = async (nombreColeccion, filtro) => {
+  let db = await conectarDB();
+  let coleccion = db.collection(nombreColeccion);
+  return coleccion.findOne(filtro);
+}
+
 
 /**
  * Convirtiendo el filtro._id en un objetoId
@@ -31,27 +37,23 @@ const leerDocumentos = async (nombreColeccion, filtro) => {
  */
 const obtenerFiltroId = (filtro, nuevoDocumento, esConsulta = false) => {
 
-  if(esConsulta){
-    //Cuando es consulta
+  if (esConsulta) {
+    // Cuando viene de leerDocumentos
     if (filtro && filtro._id) {
-      filtro._id = new ObjectID(filtro._id);
-    }
-  }else{
-    if (esConsulta && filtro && filtro._id) {
-      filtro._id = new ObjectID(filtro._id);
-    }else{
-      // Cuando viene de modificar o eliminar documento 
-      if(filtro  &&  filtro._id){
-        filtro._id = new ObjectID(filtro._id);
-        if (nuevoDocumento) {
-          nuevoDocumento._id = filtro._id;
-        }
-      }else{
-        // Cuando obtenerFiltroId se invoca desde modificar o eliminar
-        throw new Error("El id es obligatorio");
+      filtro._id = new ObjectId(filtro._id)
+    } 
+  }else {
+    // Cuando viene de modificar o eliminar documento
+    if (filtro && filtro._id) {
+      filtro._id = new ObjectId(filtro._id)
+      if (nuevoDocumento) { // Validacion (nuevoDocumento != null && nuevoDocumento!=undefined && nuevoDocumento!=false)
+        nuevoDocumento._id = filtro._id
       }
+    } else {
+      throw new Error("El id es obligatorio")
     }
   }
+
 }
 
 const agregarDocumento = async (nombreColeccion, informacion)=>{
@@ -81,4 +83,5 @@ module.exports = {
   leerDocumentos,
   agregarDocumento,
   eliminarDocumento,
-  modificarDocumento};
+  modificarDocumento,
+  leerDocumento};
