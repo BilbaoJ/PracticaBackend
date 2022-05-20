@@ -1,5 +1,5 @@
 const { compararHash } = require("../services/bcrypt.service");
-const { crearToken } = require("../services/jwt.service");
+const { crearToken, verificarToken, decodificarToken } = require("../services/jwt.service");
 const { leerDocumento } = require("../services/mongodb.service");
 
 const login = async (req, res) => {
@@ -48,6 +48,33 @@ const login = async (req, res) => {
 
 }
 
+const validarToken = (req, res) => {
+    try {
+        let respuesta = {};
+        const token = req.headers.token;
+
+        let tokenEsCorrecto = decodificarToken(token);
+        if (tokenEsCorrecto) {
+            respuesta.ok = true;
+            respuesta.message = "Usuario verificado";
+            respuesta.info = tokenEsCorrecto;
+            res.send(respuesta);
+        } else {
+            respuesta.ok = false;
+            respuesta.message = "Usuario no verificado";
+            respuesta.info = null;
+            res.status(401).send(respuesta);
+        }
+    } catch (error) {
+        respuesta.ok = false;
+        respuesta.message = "Error no controlado";
+        respuesta.info = null;
+        res.status(500).send(respuesta);
+    }
+
+}
+
 module.exports = {
-    login
+    login,
+    validarToken
 }

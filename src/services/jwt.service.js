@@ -31,6 +31,7 @@ const verificarToken = (token) => {
  */
 const decodificarToken = (token) => {
     
+    return jwt.verify(token, PRIVATE_KEY);
 }
 
 module.exports = {

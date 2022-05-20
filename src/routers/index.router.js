@@ -18,6 +18,7 @@ router.post(version + "/usuarios", usuario_controller.crearUsuario);
 router.use(verificarPeticion);
 
 // Definición de los endpoints - rutas
+router.get(version + "/validate", auth_controller.validarToken);
 router.get(version + "/usuarios", usuario_controller.consultarUsuarios);
 router.get(version + "/usuarios/:id", usuario_controller.consultarUsuario);
 router.put(version + "/usuarios/:id", usuario_controller.modificarUsuario);
